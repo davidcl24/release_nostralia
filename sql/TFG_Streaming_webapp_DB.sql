@@ -143,3 +143,19 @@ ALTER TABLE "shows_actors" ADD FOREIGN KEY ("shows_id") REFERENCES "shows" ("id"
 
 ALTER TABLE "shows_actors" ADD FOREIGN KEY ("actors_id") REFERENCES "actors" ("id");
 
+INSERT INTO "users" (
+  "username", 
+  "email", 
+  "password_hash", 
+  "signup_date", 
+  "updated_at", 
+  "role"
+) 
+VALUES (
+  'administrador', 
+  'admin@example.com', 
+  '$pbkdf2-sha512$160000$33Ae5GEg5gO7hDMlRyCDUw$0ZNZTjZp2FnSvxq130kanKvD1PVP3KoDLcjyPWyUjcDblck6vCjFNOWjNJ98bYo4FVD8KOtLM/VIvC8KbDp8HQ', /*12345*/
+  CURRENT_DATE, 
+  CURRENT_DATE, 
+  'admin'
+);
