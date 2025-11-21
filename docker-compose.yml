@@ -143,6 +143,6 @@ services:
       - 25008:3000
     depends_on:
       - api_gateway
-  volumes:
-    nostralia_database:
-    nostralia_video_uploads:
+volumes:
+  nostralia_database:
+  nostralia_video_uploads:
