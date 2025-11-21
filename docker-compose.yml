@@ -140,7 +140,7 @@ services:
       - API_GATEWAY_URL=http://api_gateway:30000
       - STREAMING_URL=http://hls_nginx:8080
     ports:
-      - 25009:3000
+      - 25008:3000
     depends_on:
       - api_gateway
   volumes:
