@@ -131,18 +131,18 @@ services:
   #   depends_on:
   #     - api_gateway
   
-  client_frontend:
-    build: 
-      context: https://github.com/davidcl24/client-frontend.git
-      dockerfile: Dockerfile
-    container_name: client_frontend_container
-    environment:
-      - API_GATEWAY_URL=http://api_gateway:30000
-      - STREAMING_URL=http://hls_nginx:8080
-    ports:
-      - 25008:3000
-    depends_on:
-      - api_gateway
+  # client_frontend:
+  #   build: 
+  #     context: https://github.com/davidcl24/client-frontend.git
+  #     dockerfile: Dockerfile
+  #   container_name: client_frontend_container
+  #   environment:
+  #     - API_GATEWAY_URL=http://api_gateway:30000
+  #     - STREAMING_URL=http://hls_nginx:8080
+  #   ports:
+  #     - 25008:3000
+  #   depends_on:
+  #     - api_gateway
 volumes:
   nostralia_database:
   nostralia_video_uploads:
