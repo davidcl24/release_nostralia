@@ -119,17 +119,17 @@ services:
     depends_on:
       - postgres_db
 
-  contents_manager_portal:
-    build: 
-      context: https://github.com/davidcl24/contents-manager-portal.git
-      dockerfile: Dockerfile
-    container_name: contents_manager_portal_container
-    environment:
-      - API_GATEWAY_URL=http://api_gateway:30000
-    ports:
-      - 25009:3000
-    depends_on:
-      - api_gateway
+  # contents_manager_portal:
+  #   build: 
+  #     context: https://github.com/davidcl24/contents-manager-portal.git
+  #     dockerfile: Dockerfile
+  #   container_name: contents_manager_portal_container
+  #   environment:
+  #     - API_GATEWAY_URL=http://api_gateway:30000
+  #   ports:
+  #     - 25009:3000
+  #   depends_on:
+  #     - api_gateway
   
   client_frontend:
     build: 
