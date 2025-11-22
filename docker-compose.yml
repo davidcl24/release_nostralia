@@ -29,7 +29,6 @@ services:
       - POSTGRES_PASSWORD=example
       - POSTGRES_DB=streamingdb
     volumes:
-      - ./sql/TFG_Streaming_webapp_DB.sql:/docker-entrypoint-initdb.d/init.sql
       - nostralia_database:/var/lib/postgresql/data
     expose:
       - 5432
@@ -50,7 +49,6 @@ services:
       dockerfile: DockerfileNginx
     container_name: hls_nginx_container
     volumes:
-      - ./config/nginx_custom.conf:/etc/nginx/nginx.conf
       - nostralia_video_uploads:/mnt
     expose:
       - 8080
