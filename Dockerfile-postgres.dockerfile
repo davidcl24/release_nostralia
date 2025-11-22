@@ -1,0 +1,6 @@
+FROM postgres:latest
+
+COPY ./sql/TFG_Streaming_webapp_DB.sql /docker-entrypoint-initdb.d/init.sql
+
+EXPOSE 5432
+
