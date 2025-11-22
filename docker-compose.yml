@@ -6,6 +6,8 @@ services:
     expose:
       - 30000
     container_name: api_gateway_container
+    volumes:
+      - nostralia_video_uploads:/uploads
     environment:
       - CONTENTS_SERVICE_URL=http://contents_service:8000/api
       - FAVOURITES_SERVICE_URL=http://favourites_service:7600
