@@ -20,7 +20,9 @@ services:
     restart: on-failure
 
   postgres_db:
-    build: ./DockerfilePostgres
+    build: 
+      context: https://github.com/davidcl24/release_nostralia.git
+      dockerfile: DockerfilePostgres
     container_name: postgres_db_container
     environment:
       - POSTGRES_USER=default
@@ -43,7 +45,9 @@ services:
 
   
   hls_nginx:
-    build: ./DockerfileNginx
+    build:
+      context: https://github.com/davidcl24/release_nostralia.git
+      dockerfile: DockerfileNginx
     container_name: hls_nginx_container
     volumes:
       - ./config/nginx_custom.conf:/etc/nginx/nginx.conf
