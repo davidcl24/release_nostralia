@@ -12,6 +12,9 @@ services:
       - HISTORY_SERVICE_URL=http://history_service:7500
       - USERS_SERVICE_URL=http://users_service:4000/api
       - SECRET_KEY=eafed520b6c29b8d3c093a2a5b65b51a
+      - REDIS_HOST=redis_queue
+    depends_on:
+      - ffmpeg_transcoder
 
   postgres_db:
     image: postgres:latest
@@ -53,6 +56,8 @@ services:
     volumes:
       - nostralia_video_uploads:/uploads
     container_name: ffmpeg_transcoder_container
+    depends_on:
+      - redis_queue
   
   contents_service:
     build: 
@@ -81,7 +86,9 @@ services:
       - DB_USERNAME=default
       - DB_PASSWORD=example
       - DB_DATABASE=streamingdb
+      - DATABASE_URL=postgres://default:example@postgres_db:5432/streamingdb
       - SECRET_KEY=eafed520b6c29b8d3c093a2a5b65b51a
+      - PHX_SERVER=true
     expose:
       - 4000
     depends_on:
@@ -140,7 +147,7 @@ services:
       - API_GATEWAY_URL=http://api_gateway:30000
       - STREAMING_URL=http://hls_nginx:8080
     ports:
-      - 25008:3000
+      - 25008:3333
     depends_on:
       - api_gateway
 volumes:
