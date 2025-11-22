@@ -20,7 +20,7 @@ services:
     restart: on-failure
 
   postgres_db:
-    image: postgres:latest
+    build: ./Dockerfile-postgres.dockerfile
     container_name: postgres_db_container
     environment:
       - POSTGRES_USER=default
@@ -43,7 +43,7 @@ services:
 
   
   hls_nginx:
-    image: alqutami/rtmp-hls
+    build: ./Dockerfile-nginx.dockerfile
     container_name: hls_nginx_container
     volumes:
       - ./config/nginx_custom.conf:/etc/nginx/nginx.conf
