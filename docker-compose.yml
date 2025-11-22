@@ -17,6 +17,7 @@ services:
       - REDIS_HOST=redis_queue
     depends_on:
       - ffmpeg_transcoder
+    restart: on-failure
 
   postgres_db:
     image: postgres:latest
@@ -30,14 +31,16 @@ services:
       - nostralia_database:/var/lib/postgresql/data
     expose:
       - 5432
-    ports:
-      - 25010:5432
+    restart: on-failure
+
   
   redis_queue:
     image: redis:latest
     container_name: redis_queue_container
     expose:
       - 6379
+    restart: on-failure
+
   
   hls_nginx:
     image: alqutami/rtmp-hls
@@ -47,6 +50,10 @@ services:
       - nostralia_video_uploads:/mnt
     expose:
       - 8080
+    ports:
+      - 8080:8080
+    restart: on-failure
+
 
   ffmpeg_transcoder:
     build: 
@@ -60,6 +67,8 @@ services:
     container_name: ffmpeg_transcoder_container
     depends_on:
       - redis_queue
+    restart: on-failure
+
   
   contents_service:
     build: 
@@ -76,6 +85,8 @@ services:
       - 8000
     depends_on:
       - postgres_db
+    restart: on-failure
+
 
   users_service:
     build: 
@@ -95,6 +106,7 @@ services:
       - 4000
     depends_on:
       - postgres_db
+    restart: on-failure
 
   favourites_service:
     build: 
@@ -111,6 +123,7 @@ services:
       - 7600
     depends_on:
       - postgres_db
+    restart: on-failure
 
   history_service:
     build: 
@@ -127,6 +140,7 @@ services:
       - 7500
     depends_on:
       - postgres_db
+    restart: on-failure
 
   contents_manager_portal:
     build: 
@@ -139,6 +153,7 @@ services:
       - 25009:3000
     depends_on:
       - api_gateway
+    restart: on-failure
   
   client_frontend:
     build: 
@@ -147,11 +162,13 @@ services:
     container_name: client_frontend_container
     environment:
       - API_GATEWAY_URL=http://api_gateway:30000
-      - STREAMING_URL=http://hls_nginx:8080
+      - STREAMING_URL=http://vms.iesluisvives.org:25010
     ports:
       - 25008:3333
     depends_on:
       - api_gateway
+    restart: on-failure
+
 volumes:
   nostralia_database:
   nostralia_video_uploads:
