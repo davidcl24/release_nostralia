@@ -20,7 +20,7 @@ services:
     restart: on-failure
 
   postgres_db:
-    build: ./Dockerfile-postgres.dockerfile
+    build: ./DockerfilePostgres
     container_name: postgres_db_container
     environment:
       - POSTGRES_USER=default
@@ -43,7 +43,7 @@ services:
 
   
   hls_nginx:
-    build: ./Dockerfile-nginx.dockerfile
+    build: ./DockerfileNginx
     container_name: hls_nginx_container
     volumes:
       - ./config/nginx_custom.conf:/etc/nginx/nginx.conf
