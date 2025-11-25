@@ -3,6 +3,7 @@ services:
     build:
       context: https://github.com/davidcl24/api_gateway.git
       dockerfile: Dockerfile
+    image: api_gateway:0.0.1
     expose:
       - 30000
     container_name: api_gateway_container
